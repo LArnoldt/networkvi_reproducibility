@@ -7,11 +7,7 @@ import gzip
 import shutil
 
 def download_Hao2021():
-    '''
-    Function downloads CITE-seq datasets of Hao 2021.
-    Database Link: https://www.ncbi.nlm.nih.gov/geo/query/acc.cgi?acc=GSE164378/ / https://atlas.fredhutch.org/nygc/multimodal-pbmc/
-    DOI: 10.1016/j.cell.2021.04.048
-    '''
+    '''Function downloads CITE-seq datasets of Hao 2021.'''
 
     r = requests.get("https://ftp.ncbi.nlm.nih.gov/geo/samples/GSM5008nnn/GSM5008737/suppl/GSM5008737_RNA_3P-barcodes.tsv.gz", allow_redirects=True)
     open(os.path.join(os.getcwd(), "preprocessing", "datasets", "Hao2021", "data", "GSM5008737_RNA_3P-barcodes.tsv.gz"), 'wb').write(r.content)

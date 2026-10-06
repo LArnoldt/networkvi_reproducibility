@@ -1,0 +1,34 @@
+# Machine-local symlinks to private experiment-result/resource storage — never published
+.experiment_data/
+pyscenic_0.12.1.sif
+preprocessing/resources/grand/
+preprocessing/resources/msigdb/
+preprocessing/resources/transcription_factors/
+preprocessing/resources/contact_domains/encode/
+preprocessing/resources/ppi/*.csv
+preprocessing/resources/ebi_ensembl_go_mappings/*.gaf
+preprocessing/resources/ebi_ensembl_go_mappings/*.obo
+preprocessing/resources/tad2_irf_tracks/*.bigWig
+
+# Regenerated notebook outputs and stray intermediate files a cell wrote into its own cwd
+# (notebooks execute with cwd=postprocessing/, so relative paths land here directly) —
+# reproducible on demand, not shipped. Only the .ipynb files themselves ship.
+postprocessing/*/
+postprocessing/*.csv
+postprocessing/*.npy
+postprocessing/*.npz
+postprocessing/*.bed
+postprocessing/*.bed.gz
+postprocessing/*.gz
+postprocessing/*.txt
+postprocessing/*.pkl
+
+# Manuscript/reviewer-correspondence reference material kept for local verification only — not shipped
+*.pdf
+REVIEWER_2_RESPONSE.md
+
+# Jupyter/Python cruft
+.ipynb_checkpoints/
+__pycache__/
+*.pyc
+.pybiomart.sqlite

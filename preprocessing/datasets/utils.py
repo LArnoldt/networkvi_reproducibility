@@ -35,11 +35,10 @@ def find_nearest_gene_atac_peaks(row, max_dist):
 
 def preprocessing_rna(rna):
 
-    rna.var['mt'] = rna.var_names.str.startswith('MT-')  # annotate the group of mitochondrial genes as 'mt'
+    rna.var['mt'] = rna.var_names.str.startswith('MT-')
     sc.pp.calculate_qc_metrics(rna, qc_vars=['mt'], percent_top=None, log1p=False, inplace=True)
     mu.pp.filter_var(rna, 'n_cells_by_counts', lambda x: x >= 3)
-    mu.pp.filter_obs(rna, 'n_genes_by_counts', lambda x: x >= 200)# & (x < 5000))
-    #mu.pp.filter_obs(rna, 'total_counts', lambda x: x < 15000)
+    mu.pp.filter_obs(rna, 'n_genes_by_counts', lambda x: x >= 200)
     mu.pp.filter_obs(rna, 'pct_counts_mt', lambda x: x < 20)
 
     rna.layers["counts"] = rna.X.copy()
@@ -58,8 +57,6 @@ def preprocessing_rna(rna):
 
 def preprocessing_atac(atac):
 
-    #sc.pp.calculate_qc_metrics(atac, percent_top=None, log1p=False, inplace=True)
-    #mu.pp.filter_var(atac, 'n_cells_by_counts', lambda x: x >= 10)
     epi.pp.filter_features(atac, min_cells=10)
     epi.pp.filter_cells(atac, min_features=10)
 
@@ -70,14 +67,12 @@ def preprocessing_atac(atac):
     sc.pp.normalize_per_cell(atac, counts_per_cell_after=1e4)
     sc.pp.log1p(atac)
 
-    #sc.pp.highly_variable_genes(atac, n_top_genes=20000, min_mean=0.05, max_mean=1.5, min_disp=.5, )
 
     sc.pp.scale(atac)
     sc.tl.pca(atac, n_comps=100, svd_solver="auto")
     sc.pp.neighbors(atac)
     sc.tl.umap(atac)
 
-    #mu.atac.tl.lsi(atac)
 
     return atac
 
