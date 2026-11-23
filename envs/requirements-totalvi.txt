@@ -1,0 +1,2 @@
+scvi-tools==1.0.0
+scib-metrics==0.5.1
